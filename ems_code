@@ -3,7 +3,6 @@
 // #include<string>
 // #include<stringstream>
 
-
 //check id if same then ask to enter new id ,id cant be same..!!!!!
 
 #include <bits/stdc++.h>
@@ -17,14 +16,14 @@ void new_member()
     // string name,dept,category,id;
     // cin>>name>>id>>dept>>category;
     string arr[4];
-    cout<<"Name:";
+    cout << "Name:";
     getline(cin, arr[0]);
-    cout<<"Id:";
+    cout << "Id:";
     cin >> arr[1];
-    cout<<"Department:";
-    cin>> arr[2];
-    cout<<"Category:";
-    cin>> arr[3];
+    cout << "Department:";
+    cin >> arr[2];
+    cout << "Category:";
+    cin >> arr[3];
     for (int i = 0; i < 4; i++)
     {
         fin << arr[i] << "-";
@@ -32,53 +31,87 @@ void new_member()
     fin << endl;
 }
 
-
-void take_attendance(string dept,string category)
+void take_attendance(string dept, string category)
 {
 
-    ifstream fin;
-    fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt", ios::app);
-    string name,dept,category,id;
-   
+    fstream fin;
+    string filename;
+    filename = "D:\\vs code files\\c++ files\\text_files\\";
+    filename = filename + dept + ".txt";
+    cout << filename << endl;
+    // fin.open("D:\\vs code files\\c++ files\\text_files\\dept.txt");
+    fin.open(filename,ios::in| ios::out|ios::binary);
+    char attendance;
+    int cur_attendace;
 
-    cout<<"Name:";
-    getline(cin, name);
-    cout<<" <<name<<" "<<is present or not ?";
-
-    
-}
-void display__all_employees()
-{
-    ifstream fin;
-    fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt");
-    while (!fin.eof())
+    string name, str;
+    while (getline(fin, str))
     {
-        string str;
-        getline(fin, str);
+        cout<<str<<endl;
+        cout<<fin.tellg()<<endl;
+
+        int cur_pos = fin.tellg();
         stringstream ss(str);
-
-        string token;
-        string ar[] = {"Name->", "ID->", "Department->", "Category->"};
-        int i = 0;
-        while (getline(ss, token, '-'))
+        getline(ss, name, '-');
+        cout << name << " is present or absent:";
+        cin >> attendance;
+        if (attendance == 'Y')
         {
+            int pos;
+            int i;
+            for (i = 0; i < str.length(); i++)
+            {
+                if (str[i] == '-')
+                    pos = i;
+            }
+            string cur_attend = str.substr(pos + 1, i - pos - 1);
+            // cout << cur_attend << endl;Y
+            cur_attendace = stoi(cur_attend);
 
-            cout << ar[i++] << " " << token << '\n';
+            cur_attendace++;
+
+            fin.seekg(pos + 1);
+            fin << cur_attendace<<endl;
+
         }
-        cout << "\n";
+        fin.seekg(cur_pos);
+
+        
     }
 }
+    void display__all_employees()
+    {
+        ifstream fin;
+        fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt");
+        while (!fin.eof())
+        {
+            string str;
+            getline(fin, str);
+            stringstream ss(str);
 
-int main()
-{
-    ifstream i;
-    i.open("D:\\vs code files\\c++ files\\text_files\\storehouse.txt");
-    ifstream fin;
-    fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt");
-    //     i.seekg (0, ios :: beg);
-    // char c;
-    // store_attendance();
-    // read_attendance();
+            string token;
+            string ar[] = {"Name->", "ID->", "Department->", "Category->"};
+            int i = 0;
+            while (getline(ss, token, '-'))
+            {
 
-    return 0;
-}
+                cout << ar[i++] << " " << token << '\n';
+            }
+            cout << "\n";
+        }
+    }
+
+    int main()
+    {
+        ifstream i;
+        i.open("D:\\vs code files\\c++ files\\text_files\\storehouse.txt");
+        ifstream fin;
+        fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt");
+        //     i.seekg (0, ios :: beg);
+        // char c;
+        // store_attendance();
+        // read_attendance();
+        take_attendance("attendance", "cse");
+
+        return 0;
+    }
