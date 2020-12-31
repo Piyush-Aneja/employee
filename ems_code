@@ -1,0 +1,84 @@
+// #include<fstream>
+// #include<iostream>
+// #include<string>
+// #include<stringstream>
+
+
+//check id if same then ask to enter new id ,id cant be same..!!!!!
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void new_member()
+{
+
+    ofstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt", ios::app);
+    // string name,dept,category,id;
+    // cin>>name>>id>>dept>>category;
+    string arr[4];
+    cout<<"Name:";
+    getline(cin, arr[0]);
+    cout<<"Id:";
+    cin >> arr[1];
+    cout<<"Department:";
+    cin>> arr[2];
+    cout<<"Category:";
+    cin>> arr[3];
+    for (int i = 0; i < 4; i++)
+    {
+        fin << arr[i] << "-";
+    }
+    fin << endl;
+}
+
+
+void take_attendance(string dept,string category)
+{
+
+    ifstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt", ios::app);
+    string name,dept,category,id;
+   
+
+    cout<<"Name:";
+    getline(cin, name);
+    cout<<" <<name<<" "<<is present or not ?";
+
+    
+}
+void display__all_employees()
+{
+    ifstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt");
+    while (!fin.eof())
+    {
+        string str;
+        getline(fin, str);
+        stringstream ss(str);
+
+        string token;
+        string ar[] = {"Name->", "ID->", "Department->", "Category->"};
+        int i = 0;
+        while (getline(ss, token, '-'))
+        {
+
+            cout << ar[i++] << " " << token << '\n';
+        }
+        cout << "\n";
+    }
+}
+
+int main()
+{
+    ifstream i;
+    i.open("D:\\vs code files\\c++ files\\text_files\\storehouse.txt");
+    ifstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt");
+    //     i.seekg (0, ios :: beg);
+    // char c;
+    // store_attendance();
+    // read_attendance();
+
+    return 0;
+}
