@@ -100,6 +100,11 @@ void take_attendance(string dept, string category)
              fin.clear();
         fin.seekg(pos_tellg);
         }
+        else
+        {
+            continue;
+        }
+        
         
        
     }
