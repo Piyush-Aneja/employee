@@ -40,15 +40,18 @@ void take_attendance(string dept, string category)
     filename = filename + dept + ".txt";
     cout << filename << endl;
     // fin.open("D:\\vs code files\\c++ files\\text_files\\dept.txt");
-    fin.open(filename,ios::in| ios::out|ios::binary);
+    fin.open(filename, ios::in | ios::out | ios::binary);
     char attendance;
-    int cur_attendace;
+    int cur_attendace, cur_attendace_update;
 
     string name, str;
+    int pos_tellg;
+    pos_tellg = fin.tellg();
+    cout << "pos_tellg:" << pos_tellg << endl;
     while (getline(fin, str))
     {
-        cout<<str<<endl;
-        cout<<fin.tellg()<<endl;
+        cout << str << endl;
+        // cout<<fin.tellg()<<endl;
 
         int cur_pos = fin.tellg();
         stringstream ss(str);
@@ -67,51 +70,73 @@ void take_attendance(string dept, string category)
             string cur_attend = str.substr(pos + 1, i - pos - 1);
             // cout << cur_attend << endl;Y
             cur_attendace = stoi(cur_attend);
+            cur_attendace_update = cur_attendace;
 
-            cur_attendace++;
+            // cur_attendace_update=cur_attendace;
+            cur_attendace_update++;
+            cout << cur_attendace_update << endl;
+            cout << to_string(cur_attendace_update) << endl;
+            string cur_attendace_str = to_string(cur_attendace);
+            str = str.replace(pos + 1, cur_attendace_str.length(), to_string(cur_attendace_update));
+            cout << str << endl;
+            // fin<<cur_pos;
 
-            fin.seekg(pos + 1);
-            fin << cur_attendace<<endl;
+            // cur_attendace++;
 
+            // cout<<fin.tellp()<<endl;
+            // fin << cur_attendace<<endl;
+
+            // fin>>str;
+            fin.seekg(pos_tellg, ios::beg);
+            // for (int i = 0; str[i] != '\0'; i++)
+            // {
+            //     fin.put((char)str[i]);
+            // }
+        // str="abcd";
+        // rewind(fin);
+            fin <<str<<endl;
+            pos_tellg=fin.tellg();
+            str = "";
+             fin.clear();
+        fin.seekg(pos_tellg);
         }
-        fin.seekg(cur_pos);
-
         
+       
     }
 }
-    void display__all_employees()
+void display__all_employees()
+{
+    ifstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt");
+    while (!fin.eof())
     {
-        ifstream fin;
-        fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt");
-        while (!fin.eof())
+        string str;
+        getline(fin, str);
+        stringstream ss(str);
+
+        string token;
+        string ar[] = {"Name->", "ID->", "Department->", "Category->"};
+        int i = 0;
+        while (getline(ss, token, '-'))
         {
-            string str;
-            getline(fin, str);
-            stringstream ss(str);
 
-            string token;
-            string ar[] = {"Name->", "ID->", "Department->", "Category->"};
-            int i = 0;
-            while (getline(ss, token, '-'))
-            {
-
-                cout << ar[i++] << " " << token << '\n';
-            }
-            cout << "\n";
+            cout << ar[i++] << " " << token << '\n';
         }
+        cout << "\n";
     }
+}
 
-    int main()
-    {
-        ifstream i;
-        i.open("D:\\vs code files\\c++ files\\text_files\\storehouse.txt");
-        ifstream fin;
-        fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt");
-        //     i.seekg (0, ios :: beg);
-        // char c;
-        // store_attendance();
-        // read_attendance();
-        take_attendance("attendance", "cse");
+int main()
+{
+    ifstream i;
+    i.open("D:\\vs code files\\c++ files\\text_files\\storehouse.txt");
+    ifstream fin;
+    fin.open("D:\\vs code files\\c++ files\\text_files\\attendance.txt");
+    //     i.seekg (0, ios :: beg);
+    // char c;
+    // store_attendance();
+    // read_attendance();
+    take_attendance("attendance", "cse");
 
-        return 0;
-    }
+    return 0;
+}
