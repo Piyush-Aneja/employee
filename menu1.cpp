@@ -9,6 +9,8 @@ int main()
     cout << "press 1 for EMPLOYER\npress 2 for EMPLOYEE\npress 3 for PROBIES\n"
          << endl;
     cin >> a;
+
+AGAIN:
     switch (a)
     {
     case 1: //this section is for HEADS
@@ -35,6 +37,7 @@ int main()
                 break;
             case 2: //expenditure retrieval
             }
+            break;
 
         case 'B':
             head_sales();
@@ -126,125 +129,151 @@ int main()
             cin >> empID; //string type
         }
         break;
-}
 
-void displayOptions()
-{
-    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. SHOW PROBIE'S ASSESSMENT";
-    //cout<<"enter 'P' for permanent employee(s)\n enter 'p' probies\n");
-}
+    default:
+        int runDecision;
+        cout << "Enter 1 to re-enter or,\nEnter 0 to exit\n";
+        cin >> runDecision;
+        if (runDecision == 1)
+        {
+            goto AGAIN;
+        }
+        else
+            exit(0);
+    }
 
-void employeeType()
-{
-    cout << "\nPress 'P' for Permanent employees\nPress 'p' for Probies\nPress 'A' for all employees under the dept\n"
-         << endl;
-}
+    void displayOptions()
+    {
+        cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. SHOW PROBIE'S ASSESSMENT\n4. TAKE PROBIES ASSESSMENT\n";
+    }
 
-void head_sales()
-{
-    displayOptions();
-    cin >> c;
-    if (c == 1)
+    void employeeType()
     {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // take attendance of permanent employee
-            else if (empType == 'p') //take attendance of Probies
-                else                 //call to take attendance of all employees in SALES
+        cout << "\nPress 'P' for Permanent employees\nPress 'p' for Probies\nPress 'A' for all employees under the dept\n"
+             << endl;
     }
-    else if (c == 2)
-    {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // show attendance of permanent employee
-            else if (empType == 'p') //show attendance of Probies
-                else                 //call to show attendance of all employees in SALES
-    }
-    else
-    {
-        //here goes the assessment of probies of SALES dept
-    }
-}
 
-void head_pr()
-{
-    displayOptions();
-    cin >> c;
-    if (c == 1)
+    void head_sales()
     {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // take attendance of permanent employee
-            else if (empType == 'p') //take attendance of Probies
-                else                 //call to take attendance of all employees in PR
+        displayOptions();
+        cin >> c;
+        if (c == 1)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // take attendance of permanent employee
+                else if (empType == 'p') //take attendance of Probies
+                    else                 //call to take attendance of all employees in SALES
+        }
+        else if (c == 2)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // show attendance of permanent employee
+                else if (empType == 'p') //show attendance of Probies
+                    else                 //call to show attendance of all employees in SALES
+        }
+        else if (c == 3)
+        {
+            //here goes the assessment of probies of SALES dept
+        }
+        else
+        {
+            //here take assessment for probies will be triggerred
+        }
     }
-    else if (c == 2)
-    {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // show attendance of permanent employee
-            else if (empType == 'p') //show attendance of Probies
-                else                 //call to show attendance of all employees in PR
-    }
-    else
-    {
-        //here goes the assessment of probies of PR dept
-    }
-}
 
-void head_tech()
-{
-    displayOptions();
-    cin >> c;
-    if (c == 1)
+    void head_pr()
     {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // take attendance of permanent employee
-            else if (empType == 'p') //take attendance of Probies
-                else                 //call to take attendance of all employees in TECH
+        displayOptions();
+        cin >> c;
+        if (c == 1)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // take attendance of permanent employee
+                else if (empType == 'p') //take attendance of Probies
+                    else                 //call to take attendance of all employees in PR
+        }
+        else if (c == 2)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // show attendance of permanent employee
+                else if (empType == 'p') //show attendance of Probies
+                    else                 //call to show attendance of all employees in PR
+        }
+        else if (c == 3)
+        {
+            //here goes the assessment of probies of PR dept
+        }
+        else
+        {
+            //here take assessment for probies will be triggerred
+        }
     }
-    else if (c == 2)
-    {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // show attendance of permanent employee
-            else if (empType == 'p') //show attendance of Probies
-                else                 //call to show attendance of all employees in TECH
-    }
-    else
-    {
-        //here goes the assessment of probies of TECH dept
-    }
-}
 
-void head_hr()
-{
-    displayOptions();
-    cin >> c;
-    if (c == 1)
+    void head_tech()
     {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // take attendance of permanent employee
-            else if (empType == 'p') //take attendance of Probies
-                else                 //call to take attendance of all employees in HR
+        displayOptions();
+        cin >> c;
+        if (c == 1)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // take attendance of permanent employee
+                else if (empType == 'p') //take attendance of Probies
+                    else                 //call to take attendance of all employees in TECH
+        }
+        else if (c == 2)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // show attendance of permanent employee
+                else if (empType == 'p') //show attendance of Probies
+                    else                 //call to show attendance of all employees in TECH
+        }
+        else if (c == 3)
+        {
+            //here goes the assessment of probies of TECH dept
+        }
+        else
+        {
+            //here take assessment for probies will be triggerred
+        }
     }
-    else if (c == 2)
-    {
-        employeeType();
-        cin >> empType;
-        if (empType == 'P')          // show attendance of permanent employee
-            else if (empType == 'p') //show attendance of Probies
-                else                 //call to show attendance of all employees in HR
-    }
-    else
-    {
-        //here goes the assessment of probies of HR dept
-    }
-}
 
-void showDept()
-{
+    void head_hr()
+    {
+        displayOptions();
+        cin >> c;
+        if (c == 1)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // take attendance of permanent employee
+                else if (empType == 'p') //take attendance of Probies
+                    else                 //call to take attendance of all employees in HR
+        }
+        else if (c == 2)
+        {
+            employeeType();
+            cin >> empType;
+            if (empType == 'P')          // show attendance of permanent employee
+                else if (empType == 'p') //show attendance of Probies
+                    else                 //call to show attendance of all employees in HR
+        }
+        else if (c == 3)
+        {
+            //here goes the assessment of probies of HR dept
+        }
+        else
+        {
+            //here take assessment for probies will be triggerred
+        }
+    }
+
+    void showDept()
+    {
     cout<<"\n B) SALES HEAD\n C) PUBLIC RELATIONS HEAD\n D) TECHNICAL HEAD\n E) HR HEAD\n");
-}
+    }
