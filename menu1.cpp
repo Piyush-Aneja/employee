@@ -6,11 +6,10 @@ int main()
     char ch;
     cout << "%-15WELCOME TO EMPLOYEE MANAGEMENT SYSTEM\n\n"
          << endl;
+AGAIN:
     cout << "press 1 for EMPLOYER\npress 2 for EMPLOYEE\npress 3 for PROBIES\n"
          << endl;
     cin >> a;
-
-AGAIN:
     switch (a)
     {
     case 1: //this section is for HEADS
