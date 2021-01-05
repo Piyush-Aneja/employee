@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <stdio.h>
@@ -46,40 +47,6 @@ void getdata(string dept, string category)
         }
         cout << "\n";
     }
-    fin.close();
-}
-
-void new_member()
-{
-
-    ofstream fin;
-    // fin.open("D:\\vs code files\\c++ files\\text_files\\employees.txt", ios::app);
-    string arr[4];
-    cout << "Name:";
-    getline(cin, arr[0]);
-    cout << "Your id is dd-mm-yyyy\n";
-    cout << "Id:";
-    cin >> arr[1];
-    cout << "Department:";
-    cin >> arr[2];
-    cout << "Category (P-Permanent Employee/T-Temporary Employee):";
-    cin >> arr[3];
-    if(arr[3]=="P")
-        cout<<"Salary:";
-
-
-    string filename;
-    // filename = "D:\\vs code files\\c++ files\\text_files\\";
-    // filename = filename + arr[2] +"\\"+arr[3]+ ".txt";
-
-    filename = get_filename(arr[2], arr[3]);
-    fin.open(filename, ios::app | ios::binary);
-
-    for (int i = 0; i < 4; i++)
-    {
-        fin << arr[i] << "-";
-    }
-    fin << endl;
     fin.close();
 }
 
@@ -261,8 +228,25 @@ void display_item(string dept, string category, string id)
         {
             continue;
         }
-        else //str has that person whose detail you want  to display(Add here subtr)
+        else //str has that person whose detail you want  to display(Add here substr)
         {
+            stringstream ss(str);
+            string token, ar[6] = {"Name->", "ID->", "Department->", "Category->", "", "Attendance->"};
+            if (category == "P")
+            {
+                ar[4] = "Salary->";
+            }
+            if (category == "T")
+            {
+                ar[4] = "Stipend->";
+            }
+            int i = 0;
+            while (getline(ss, token, '-'))
+            {
+
+                cout << ar[i++] << " " << token << '\n';
+            }
+            cout << "\n";
         }
     }
     fin.close();
@@ -271,11 +255,6 @@ void display_item(string dept, string category, string id)
 void search(string filename, string key)
 {
 }
-
-// void displayOptions()
-// {
-//     cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. SHOW PROBIE'S ASSESSMENT\n4. TAKE PROBIES ASSESSMENT\n";
-// }
 
 void employeeType()
 {
@@ -289,7 +268,6 @@ protected:
     int id;
     string name;
     float salary;
-    string dept;
 };
 
 class Probies
@@ -298,11 +276,13 @@ protected:
     int id;
     string name;
     float stipend;
-    string dept;
 };
 
 class HR : public Probies, public Permanent
 {
+private:
+    string dept;
+
 public:
     void Getdata(string cat)
     {
@@ -315,10 +295,57 @@ public:
     {
         take_test("HR");
     }
+    void new_member()
+    {
+
+        ofstream fin;
+        string cat;
+        int attendance = 0;
+        dept = "HR";
+        cout << "Category (P-Permanent Employee/T-Temporary Employee):";
+        cin >> cat;
+        if (cat == "P")
+        {
+            cout << "Name:";
+            getline(cin, Permanent::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Permanent::id;
+
+            cout << "Salary:";
+            cin >> salary;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Permanent::name << "-" << Permanent::id << "-" << dept << "-" << cat << "-" << salary << "-" << attendance;
+        }
+        else
+        {
+            cout << "Name:";
+            getline(cin, Probies::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Probies::id;
+
+            cout << "Stipend allowed:";
+            cin >> stipend;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Probies::name << "-" << Probies::id << "-" << dept << "-" << cat << "-" << stipend << "-" << attendance;
+        }
+
+        fin << endl;
+        fin.close();
+    }
 };
 
 class Tech : public Probies, public Permanent
 {
+    string dept;
+
 public:
     void Getdata(string cat)
     {
@@ -331,10 +358,57 @@ public:
     {
         take_test("Tech");
     }
+    void new_member()
+    {
+
+        ofstream fin;
+        string cat;
+
+        dept = "Tech";
+        cout << "Category (P-Permanent Employee/T-Temporary Employee):";
+        cin >> cat;
+        if (cat == "P")
+        {
+            cout << "Name:";
+            getline(cin, Permanent::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Permanent::id;
+
+            cout << "Salary:";
+            cin >> salary;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Permanent::name << "-" << Permanent::id << "-" << dept << "-" << cat << "-" << salary;
+        }
+        else
+        {
+            cout << "Name:";
+            getline(cin, Probies::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Probies::id;
+
+            cout << "Stipend allowed:";
+            cin >> stipend;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Probies::name << "-" << Probies::id << "-" << dept << "-" << cat << "-" << stipend;
+        }
+
+        fin << endl;
+        fin.close();
+    }
 };
 
 class Sales : public Probies, public Permanent
 {
+    string dept;
+
 public:
     void Getdata(string cat)
     {
@@ -347,10 +421,57 @@ public:
     {
         take_test("Sales");
     }
+    void new_member()
+    {
+
+        ofstream fin;
+        string cat;
+
+        dept = "Sales";
+        cout << "Category (P-Permanent Employee/T-Temporary Employee):";
+        cin >> cat;
+        if (cat == "P")
+        {
+            cout << "Name:";
+            getline(cin, Permanent::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Permanent::id;
+
+            cout << "Salary:";
+            cin >> salary;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Permanent::name << "-" << Permanent::id << "-" << dept << "-" << cat << "-" << salary;
+        }
+        else
+        {
+            cout << "Name:";
+            getline(cin, Probies::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Probies::id;
+
+            cout << "Stipend allowed:";
+            cin >> stipend;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Probies::name << "-" << Probies::id << "-" << dept << "-" << cat << "-" << stipend;
+        }
+
+        fin << endl;
+        fin.close();
+    }
 };
 
 class PR : public Probies, public Permanent
 {
+    string dept;
+
 public:
     void Getdata(string cat)
     {
@@ -362,6 +483,51 @@ public:
     void Take_test()
     {
         take_test("PR");
+    }
+    void new_member()
+    {
+
+        ofstream fin;
+        string cat;
+
+        dept = "PR";
+        cout << "Category (P-Permanent Employee/T-Temporary Employee):";
+        cin >> cat;
+        if (cat == "P")
+        {
+            cout << "Name:";
+            getline(cin, Permanent::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Permanent::id;
+
+            cout << "Salary:";
+            cin >> salary;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Permanent::name << "-" << Permanent::id << "-" << dept << "-" << cat << "-" << salary;
+        }
+        else
+        {
+            cout << "Name:";
+            getline(cin, Probies::name);
+            cout << "Your id is dd-mm-yyyy\n";
+            cout << "Id:";
+            cin >> Probies::id;
+
+            cout << "Stipend allowed:";
+            cin >> stipend;
+            string filename;
+
+            filename = get_filename(dept, cat);
+            fin.open(filename, ios::app | ios::binary);
+            fin << Probies::name << "-" << Probies::id << "-" << dept << "-" << cat << "-" << stipend;
+        }
+
+        fin << endl;
+        fin.close();
     }
 };
 
@@ -403,7 +569,7 @@ public:
 void head_hr()
 {
     HR head;
-    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n";
+    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n 5.ADD EMPLOYEE\n";
     cin >> c;
     if (c == 1)
     {
@@ -427,12 +593,16 @@ void head_hr()
         head.Getdata("P");
         head.Getdata("T");
     }
+    if (c == 5)
+    {
+        head.new_member();
+    }
 }
 
 void head_tech()
 {
     Tech head;
-    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n";
+    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3.TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n5.ADD EMPLOYEE";
     cin >> c;
     if (c == 1)
     {
@@ -456,12 +626,16 @@ void head_tech()
         head.Getdata("P");
         head.Getdata("T");
     }
+    if (c == 5)
+    {
+        head.new_member();
+    }
 }
 
 void head_sales()
 {
     Sales head;
-    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n";
+    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n5.ADD EMPLOYEE";
     cin >> c;
     if (c == 1)
     {
@@ -485,12 +659,16 @@ void head_sales()
         head.Getdata("P");
         head.Getdata("T");
     }
+    if (c == 5)
+    {
+        head.new_member();
+    }
 }
 
 void head_pr()
 {
     PR head;
-    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n";
+    cout << "1.TAKE ATTENDANCE\n2.SHOW ATTENDANCE\n3. TAKE PROBIES ASSESSMENT\n4. VIEW EMPLOYEES\n5.ADD EMPLOYEE";
     cin >> c;
     if (c == 1)
     {
@@ -514,6 +692,10 @@ void head_pr()
         head.Getdata("P");
         head.Getdata("T");
     }
+    if (c == 5)
+    {
+        head.new_member();
+    }
 }
 void showDept()
 {
@@ -535,14 +717,14 @@ AGAIN:
     cin >> a;
     switch (a)
     {
-        prev1:
+    prev1:
     case 1: //this section is for HEADS
         cout << "Choose from the following:\n A) CEO\n B) HR HEAD\n C) TECHNICAL HEAD\n D) SALES HEAD\n E) PUBLIC RELATIONS HEAD\n Press \'*\' to go to last menu\n";
         cin >> ch;
         switch (ch)
         {
         case 'A': //CEO
-            prev2:
+        prev2:
             cout << "Choose the type of data to be retrieved\n1.VIEW EMPLOYEE(S)\n2.TOTAL EXPENDITURE ON WORKFORCE\n\nPress \'0\' to go to last menu\n\n";
             cin >> k;
             switch (k1)
@@ -632,7 +814,6 @@ AGAIN:
             break;
         case '*':
             goto prev2;
-
         }
         break;
     prev4:
