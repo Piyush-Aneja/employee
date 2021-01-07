@@ -917,47 +917,47 @@ AGAIN:
             goto prev3;   
         }
     prev4:
-    case 3: //this section is for probies to show their assessment
-        cout << "Enter from the following departments to check your assessment\n";
-        cout << "\nA) HR\nB) SALES\nC) TECHNICAL\nD) PUBLIC RELATIONS\n Press \'*\' to goto last menu\n";
-        enter_choice();
-        cin >> deptSelect; // this is char
-        switch (deptSelect)
-        {
-        case 'A': //HR probie
-            cout << "\nEnter your name:";
-            cin >> empName; //string type
-            cout << "\nEnter your probies ID:";
-            cin >> empID; //string type
-            goto prev4;
-            break;
-        case 'B': //sales probie
-            cout << "\nEnter your name:";
-            cin >> empName; //string type
-            cout << "\nEnter your probies ID:";
-            cin >> empID; //string type
-            goto prev4;
-            break;
+//     case 3: //this section is for probies to show their assessment
+//         cout << "Enter from the following departments to check your assessment\n";
+//         cout << "\nA) HR\nB) SALES\nC) TECHNICAL\nD) PUBLIC RELATIONS\n Press \'*\' to goto last menu\n";
+//         enter_choice();
+//         cin >> deptSelect; // this is char
+//         switch (deptSelect)
+//         {
+//         case 'A': //HR probie
+//             cout << "\nEnter your name:";
+//             cin >> empName; //string type
+//             cout << "\nEnter your probies ID:";
+//             cin >> empID; //string type
+//             goto prev4;
+//             break;
+//         case 'B': //sales probie
+//             cout << "\nEnter your name:";
+//             cin >> empName; //string type
+//             cout << "\nEnter your probies ID:";
+//             cin >> empID; //string type
+//             goto prev4;
+//             break;
 
-        case 'C': //PR probie
-            cout << "\nEnter your name:";
-            cin >> empName; //string type
-            cout << "\nEnter your probies ID:";
-            cin >> empID; //string type
-            goto prev4;
-            break;
+//         case 'C': //PR probie
+//             cout << "\nEnter your name:";
+//             cin >> empName; //string type
+//             cout << "\nEnter your probies ID:";
+//             cin >> empID; //string type
+//             goto prev4;
+//             break;
 
-        case 'D': //technical probie
-            cout << "\nEnter your name:";
-            cin >> empName; //string type
-            cout << "\nEnter your probies ID:";
-            cin >> empID; //string type
-            goto prev4;
-            break;
-        case '*':
-            goto prev3;
-        }
-        break;
+//         case 'D': //technical probie
+//             cout << "\nEnter your name:";
+//             cin >> empName; //string type
+//             cout << "\nEnter your probies ID:";
+//             cin >> empID; //string type
+//             goto prev4;
+//             break;
+//         case '*':
+//             goto prev3;
+//         }
+//         break;
     default:
         int runDecision;
         cout << "Enter 1 to Re-enter or,\nEnter 0 to exit\n";
